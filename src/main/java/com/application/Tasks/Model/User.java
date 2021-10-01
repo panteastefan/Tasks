@@ -10,6 +10,14 @@ public class User {
     @GeneratedValue Long id;
     private String name;
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
     public User(Long id, String name) {
         this.id = id;
         this.name = name;
