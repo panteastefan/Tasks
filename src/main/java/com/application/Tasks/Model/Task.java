@@ -1,5 +1,6 @@
 package com.application.Tasks.Model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -8,7 +9,9 @@ import java.util.Date;
 @Entity
 public class Task {
     private @Id
+    @Column(nullable = false, updatable = false)
     @GeneratedValue Long id;
+    @Column(nullable = false)
     private String name;
     private String description;
     private Date date;
