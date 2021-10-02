@@ -4,11 +4,7 @@ import com.application.Tasks.Model.Task;
 import com.application.Tasks.Repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class TaskService {
@@ -39,6 +35,7 @@ public class TaskService {
     }
 
     public void deleteTask(Long id) {
-        taskRepository.deleteTaskById(id);
+        // @TODO taskRepository.deleteTaskById(id); not working. why ??
+        taskRepository.deleteById(id);
     }
 }
