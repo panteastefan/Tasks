@@ -20,9 +20,9 @@ public class TaskService {
     }
 
     public Task addTask(Task task) {
-        task.setName("Task name");
-        task.setDescription("Task description");
-        task.setDate(new GregorianCalendar(2014, Calendar.FEBRUARY, 11).getTime());
+        task.setName(task.getName());
+        task.setDescription(task.getDescription());
+        task.setDate(task.getDate());
         return taskRepository.save(task);
     }
 
