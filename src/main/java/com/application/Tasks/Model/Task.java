@@ -3,9 +3,7 @@ package com.application.Tasks.Model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 @Entity
 public class Task {
