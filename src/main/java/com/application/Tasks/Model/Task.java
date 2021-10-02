@@ -1,9 +1,6 @@
 package com.application.Tasks.Model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -14,16 +11,21 @@ public class Task {
     @Column(nullable = false)
     private String name;
     private String description;
-    private Date date;
+    @Column(nullable = false)
+    private Date dueDate;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Status status;
 
     public Task() {
     }
 
-    public Task(Long id, String name, String description, Date date) {
+    public Task(Long id, String name, String description, Date dueDate, Status status) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.date = date;
+        this.dueDate = dueDate;
+        this.status = status;
     }
 
     public Long getId() {
@@ -50,12 +52,20 @@ public class Task {
         this.description = description;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getDueDate() {
+        return dueDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDueDate(Date dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     @Override
@@ -64,7 +74,8 @@ public class Task {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", date=" + date +
+                ", dueDate=" + dueDate + '\'' +
+                ", status=" + status +
                 '}';
     }
 }

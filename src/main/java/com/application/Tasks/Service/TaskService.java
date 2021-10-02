@@ -1,5 +1,6 @@
 package com.application.Tasks.Service;
 
+import com.application.Tasks.Model.Status;
 import com.application.Tasks.Model.Task;
 import com.application.Tasks.Repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,8 @@ public class TaskService {
     public Task addTask(Task task) {
         task.setName(task.getName());
         task.setDescription(task.getDescription());
-        task.setDate(task.getDate());
+        task.setDueDate(task.getDueDate());
+        task.setStatus(Status.NEW);
         return taskRepository.save(task);
     }
 
