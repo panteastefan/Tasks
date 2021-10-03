@@ -2,20 +2,27 @@ package com.application.Tasks.Model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Task {
     private @Id
     @Column(nullable = false, updatable = false)
     @GeneratedValue Long id;
+
     @Column(nullable = false)
     private String name;
+
     private String description;
     @Column(nullable = false)
     private Date dueDate;
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Status status;
+
+    @ManyToMany(mappedBy = "tasks")
+    private Set<User> users = new HashSet<>();;
 
     public Task() {
     }
