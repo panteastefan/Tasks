@@ -1,8 +1,5 @@
 package com.application.Tasks.Model;
-
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -15,36 +12,20 @@ public class User {
     private String userName;
     private String password;
     private String name;
-    private boolean active;
-    private String roles;
 
-    public User(Long id, String userName, String password, String name, boolean active, String role) {
-        this.id = id;
+    public User(String userName, String password, String name) {
         this.userName = userName;
         this.password = password;
         this.name = name;
-        this.active = active;
-        this.roles = role;
     }
 
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(
-            name = "UserTask",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "task_id", referencedColumnName = "id")
-    )
-    Set<Task> tasks;
+    @OneToMany(mappedBy = "user")
+    private Set<Task> tasks;
 
     public User(Long id, String name, Set<Task> tasks) {
         this.id = id;
         this.name = name;
         this.tasks = tasks;
-    }
-
-    public User(Long id, String name) {
-        this.id = id;
-        this.name = name;
-        this.tasks = new HashSet<>();
     }
 
     public User() {
@@ -90,19 +71,15 @@ public class User {
         return tasks;
     }
 
-    public String getRoles() {
-        return roles;
-    }
 
-    public void setRoles(String roles) {
-        this.roles = roles;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", tasks=" + tasks +
+                '}';
     }
 }

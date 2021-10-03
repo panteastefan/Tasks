@@ -11,24 +11,20 @@ public class Task {
     @Column(nullable = false, updatable = false)
     @GeneratedValue Long id;
 
-    @Column(nullable = false)
     private String name;
-
     private String description;
-    @Column(nullable = false)
     private Date dueDate;
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
     private Status status;
 
-    @ManyToMany(mappedBy = "tasks")
-    private Set<User> users = new HashSet<>();;
+    @ManyToOne
+    @JoinColumn(name="user_id", nullable = false)
+    private User user;
 
     public Task() {
     }
 
-    public Task(Long id, String name, String description, Date dueDate, Status status) {
-        this.id = id;
+    public Task(String name, String description, Date dueDate, Status status) {
         this.name = name;
         this.description = description;
         this.dueDate = dueDate;
@@ -81,8 +77,9 @@ public class Task {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", dueDate=" + dueDate + '\'' +
+                ", dueDate=" + dueDate +
                 ", status=" + status +
+                ", user=" + user +
                 '}';
     }
 }

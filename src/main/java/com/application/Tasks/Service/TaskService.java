@@ -2,7 +2,6 @@ package com.application.Tasks.Service;
 
 import com.application.Tasks.Model.Status;
 import com.application.Tasks.Model.Task;
-import com.application.Tasks.Model.User;
 import com.application.Tasks.Repository.TaskRepository;
 import com.application.Tasks.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,10 +34,7 @@ public class TaskService {
     }
 
     public HashSet<Task> findMyTasks(Long userId) {
-        Set<User> users = new HashSet<User>();
-        users.add(userRepository.findUserById(userId));
-        return taskRepository.findTasksByUsersIn(users);
-//        return taskRepository.findTasksByUsersIs(Collections.singleton(userRepository.findUserById(userId)));
+        return taskRepository.findTasksByUserId(userId);
     }
 
     public Task updateTask(Task task) {
