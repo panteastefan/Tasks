@@ -1,7 +1,9 @@
 package com.application.Tasks.Controller;
 
+import com.application.Tasks.Model.AuthenticatedRequestDTO;
 import com.application.Tasks.Model.Task;
 import com.application.Tasks.Model.UserDTO;
+import com.application.Tasks.Service.LoginService;
 import com.application.Tasks.Service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,10 +30,16 @@ public class TaskController {
         return new ResponseEntity<>(tasks, HttpStatus.OK);
     }
     @PostMapping("/mine")
-    public ResponseEntity<Set<Task>> getMyTasks(@RequestBody UserDTO userDTO){
-        System.out.println(userDTO);
-        HashSet<Task> tasks = taskService.findMyTasks(userDTO.getUserId());
-        return new ResponseEntity<>(tasks, HttpStatus.OK);
+    public ResponseEntity<Set<Task>> getMyTasks(@RequestBody AuthenticatedRequestDTO authenticatedRequestDTO){
+        System.out.println(authenticatedRequestDTO);
+        if (authenticatedRequestDTO != null &&
+                LoginService.userTokenMap.get(authenticatedRequestDTO.getUserToken()) != null){
+
+            HashSet<Task> tasks =
+                    taskService.findMyTasks(LoginService.userTokenMap.get(authenticatedRequestDTO.getUserToken()));
+            return new ResponseEntity<>(tasks, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
     }
 
     @GetMapping("/find/{id}")
@@ -40,6 +48,7 @@ public class TaskController {
         return new ResponseEntity<>(task, HttpStatus.OK);
     }
 
+    // in loc de Task -> TaskDTO
     @PostMapping("/add")
     public ResponseEntity<Task> addTask(@RequestBody Task task){
         Task newTask = taskService.addTask(task);
