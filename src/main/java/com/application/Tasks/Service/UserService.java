@@ -1,8 +1,11 @@
 package com.application.Tasks.Service;
 
+import com.application.Tasks.Model.MyUserDetails;
 import com.application.Tasks.Model.User;
 import com.application.Tasks.Repository.UserRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,9 +20,28 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
+
     public User addUser(User user){
         user.setName(UUID.randomUUID().toString());
         return userRepository.save(user);
+    }
+    public User register(User user){
+        if (checkIfUserExist(user.getUserName())){
+            System.out.println("User exists !!!");
+            return userRepository.save(user);
+        }
+        return userRepository.save(user);
+    }
+
+    public boolean checkIfUserExist(String username) {
+        return userRepository.findByUserName(username).isPresent() ? true : false;
+    }
+
+    private void encodePassword( User userEntity, MyUserDetails user){
+        userEntity.setPassword(passwordEncoder.encode(user.getPassword()));
     }
 
     public List<User> findAllUsers(){

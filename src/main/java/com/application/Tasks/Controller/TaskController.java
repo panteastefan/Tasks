@@ -1,13 +1,16 @@
 package com.application.Tasks.Controller;
 
 import com.application.Tasks.Model.Task;
+import com.application.Tasks.Model.UserDTO;
 import com.application.Tasks.Service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/tasks")
@@ -22,6 +25,12 @@ public class TaskController {
     @GetMapping("/all")
     public ResponseEntity<List<Task>> getAllTasks(){
         List<Task> tasks = taskService.findAllTasks();
+        return new ResponseEntity<>(tasks, HttpStatus.OK);
+    }
+    @PostMapping("/mine")
+    public ResponseEntity<Set<Task>> getMyTasks(@RequestBody UserDTO userDTO){
+        System.out.println(userDTO);
+        HashSet<Task> tasks = taskService.findMyTasks(userDTO.getUserId());
         return new ResponseEntity<>(tasks, HttpStatus.OK);
     }
 

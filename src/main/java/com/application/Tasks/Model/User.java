@@ -18,6 +18,14 @@ public class User {
     private boolean active;
     private String roles;
 
+    public User(Long id, String userName, String password, String name, boolean active, String role) {
+        this.id = id;
+        this.userName = userName;
+        this.password = password;
+        this.name = name;
+        this.active = active;
+        this.roles = role;
+    }
 
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
