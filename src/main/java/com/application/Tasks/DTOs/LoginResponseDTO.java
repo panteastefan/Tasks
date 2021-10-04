@@ -1,4 +1,4 @@
-package com.application.Tasks.Model;
+package com.application.Tasks.DTOs;
 
 public class LoginResponseDTO {
     String loginToken;

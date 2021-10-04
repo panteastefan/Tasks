@@ -1,7 +1,7 @@
-package com.application.Tasks.Model;
+package com.application.Tasks.DTOs;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import com.application.Tasks.Model.Status;
+
 import java.util.Date;
 
 public class TaskDTO extends AuthenticatedRequestDTO{
