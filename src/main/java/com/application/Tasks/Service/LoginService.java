@@ -1,6 +1,6 @@
 package com.application.Tasks.Service;
 
-import com.application.Tasks.Model.LoginDTO;
+import com.application.Tasks.DTOs.LoginDTO;
 import com.application.Tasks.Model.User;
 import com.application.Tasks.Repository.UserRepository;
 import com.google.common.hash.Hashing;

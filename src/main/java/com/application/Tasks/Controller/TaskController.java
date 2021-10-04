@@ -1,8 +1,7 @@
 package com.application.Tasks.Controller;
 
-import com.application.Tasks.Model.AuthenticatedRequestDTO;
+import com.application.Tasks.DTOs.AuthenticatedRequestDTO;
 import com.application.Tasks.Model.Task;
-import com.application.Tasks.Model.UserDTO;
 import com.application.Tasks.Service.LoginService;
 import com.application.Tasks.Service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;

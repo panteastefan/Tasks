@@ -1,8 +1,7 @@
 package com.application.Tasks.Controller;
 
-import com.application.Tasks.Model.LoginDTO;
-import com.application.Tasks.Model.LoginResponseDTO;
-import com.application.Tasks.Model.UserDTO;
+import com.application.Tasks.DTOs.LoginDTO;
+import com.application.Tasks.DTOs.LoginResponseDTO;
 import com.application.Tasks.Service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

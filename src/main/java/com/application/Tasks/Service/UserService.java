@@ -22,18 +22,6 @@ public class UserService {
         user.setName(UUID.randomUUID().toString());
         return userRepository.save(user);
     }
-    public User register(User user){
-        if (checkIfUserExist(user.getUserName())){
-            System.out.println("User exists !!!");
-            return userRepository.save(user);
-        }
-        return userRepository.save(user);
-    }
-
-    public boolean checkIfUserExist(String username) {
-        return userRepository.findByUserName(username).isPresent() ? true : false;
-    }
-
     public List<User> findAllUsers(){
         return userRepository.findAll();
     }
