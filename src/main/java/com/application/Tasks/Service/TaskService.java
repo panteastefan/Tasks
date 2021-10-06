@@ -21,19 +21,15 @@ public class TaskService {
         this.userRepository = userRepository;
     }
 
-//    public Task addTask(Task task) {
-//        task.setName(task.getName());
-//        task.setDescription(task.getDescription());
-//        task.setDueDate(task.getDueDate());
-//        task.setStatus(Status.NEW);
-//        return taskRepository.save(task);
-//    }
+    public Task addTask(Task task) {
+        return taskRepository.save(task);
+    }
 
     public List<Task> findAllTasks() {
         return taskRepository.findAll();
     }
 
-    public HashSet<Task> findMyTasks(Long userId) {
+    public List<Task> findMyTasks(Long userId) {
         return taskRepository.findTasksByUserId(userId);
     }
 
