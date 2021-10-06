@@ -25,7 +25,6 @@ public class TaskController {
 
     @PostMapping("/all")
     public ResponseEntity<List<Task>> getAllTasks(@RequestBody AuthenticatedRequestDTO authenticatedRequestDTO){
-        System.out.println("TaskController/getAllTasks" + authenticatedRequestDTO);
         if (authenticatedRequestDTO != null &&
                 LoginService.userTokenMap.get(authenticatedRequestDTO.getUserToken()) != null){
             List<Task> tasks = taskService.findAllTasks();
@@ -36,7 +35,6 @@ public class TaskController {
     }
     @PostMapping("/mine")
     public ResponseEntity<Set<Task>> getMyTasks(@RequestBody AuthenticatedRequestDTO authenticatedRequestDTO){
-        System.out.println(authenticatedRequestDTO);
         if (authenticatedRequestDTO != null &&
                 LoginService.userTokenMap.get(authenticatedRequestDTO.getUserToken()) != null){
 

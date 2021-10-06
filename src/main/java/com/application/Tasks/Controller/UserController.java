@@ -1,6 +1,8 @@
 package com.application.Tasks.Controller;
 
+import com.application.Tasks.DTOs.AuthenticatedRequestDTO;
 import com.application.Tasks.Model.User;
+import com.application.Tasks.Service.LoginService;
 import com.application.Tasks.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,10 +22,15 @@ public class UserController {
     }
 
     // @TODO probably should write it using token
-    @GetMapping("/all")
-    public ResponseEntity<List<User>> getAllUsers(){
-        List<User> users = userService.findAllUsers();
-        return new ResponseEntity<>(users, HttpStatus.OK);
+    @PostMapping("/all")
+    public ResponseEntity<List<User>> getAllUsers(@RequestBody AuthenticatedRequestDTO authenticatedRequestDTO){
+        if (authenticatedRequestDTO != null &&
+                LoginService.userTokenMap.get(authenticatedRequestDTO.getUserToken()) != null){
+
+            List<User> users = userService.findAllUsers();
+            return new ResponseEntity<>(users, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
     }
 
 //    @GetMapping("/find/{id}")
