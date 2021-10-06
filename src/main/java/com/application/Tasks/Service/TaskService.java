@@ -29,9 +29,9 @@ public class TaskService {
 //        return taskRepository.save(task);
 //    }
 
-//    public List<Task> findAllTasks() {
-//        return taskRepository.findAll();
-//    }
+    public List<Task> findAllTasks() {
+        return taskRepository.findAll();
+    }
 
     public HashSet<Task> findMyTasks(Long userId) {
         return taskRepository.findTasksByUserId(userId);

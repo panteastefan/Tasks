@@ -23,10 +23,16 @@ public class TaskController {
         this.taskService = taskService;
     }
 
-    @GetMapping("/all")
-    public ResponseEntity<List<Task>> getAllTasks(){
-        List<Task> tasks = taskService.findAllTasks();
-        return new ResponseEntity<>(tasks, HttpStatus.OK);
+    @PostMapping("/all")
+    public ResponseEntity<List<Task>> getAllTasks(@RequestBody AuthenticatedRequestDTO authenticatedRequestDTO){
+        System.out.println("TaskController/getAllTasks" + authenticatedRequestDTO);
+        if (authenticatedRequestDTO != null &&
+                LoginService.userTokenMap.get(authenticatedRequestDTO.getUserToken()) != null){
+            List<Task> tasks = taskService.findAllTasks();
+            System.out.println(tasks.size());
+            return new ResponseEntity<>(tasks, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
     }
     @PostMapping("/mine")
     public ResponseEntity<Set<Task>> getMyTasks(@RequestBody AuthenticatedRequestDTO authenticatedRequestDTO){
