@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -28,18 +29,20 @@ public class TaskController {
         if (authenticatedRequestDTO != null &&
                 LoginService.userTokenMap.get(authenticatedRequestDTO.getUserToken()) != null){
             List<Task> tasks = taskService.findAllTasks();
-            System.out.println(tasks.size());
+            tasks.sort(Comparator.comparing(Task::getDueDate));
             return new ResponseEntity<>(tasks, HttpStatus.OK);
         }
         return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
     }
     @PostMapping("/mine")
-    public ResponseEntity<Set<Task>> getMyTasks(@RequestBody AuthenticatedRequestDTO authenticatedRequestDTO){
+    public ResponseEntity<List<Task>> getMyTasks(@RequestBody AuthenticatedRequestDTO authenticatedRequestDTO){
         if (authenticatedRequestDTO != null &&
                 LoginService.userTokenMap.get(authenticatedRequestDTO.getUserToken()) != null){
 
-            HashSet<Task> tasks =
+            List<Task> tasks =
                     taskService.findMyTasks(LoginService.userTokenMap.get(authenticatedRequestDTO.getUserToken()));
+
+            tasks.sort(Comparator.comparing(Task::getDueDate).reversed());
             return new ResponseEntity<>(tasks, HttpStatus.OK);
         }
         return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
@@ -50,14 +53,14 @@ public class TaskController {
 //        Task task = taskService.findTaskById(id);
 //        return new ResponseEntity<>(task, HttpStatus.OK);
 //    }
-//
-//    // in loc de Task -> TaskDTO
-//    @PostMapping("/add")
-//    public ResponseEntity<Task> addTask(@RequestBody Task task){
-//        Task newTask = taskService.addTask(task);
-//        return new ResponseEntity<>(newTask, HttpStatus.CREATED);
-//    }
-//
+
+    // in loc de Task -> TaskDTO
+    @PostMapping("/add")
+    public ResponseEntity<Task> addTask(@RequestBody Task task){
+        Task newTask = taskService.addTask(task);
+        return new ResponseEntity<>(newTask, HttpStatus.CREATED);
+    }
+
 //    @PostMapping("/update")
 //    public ResponseEntity<Task> updateTask(@RequestBody Task task){
 //        Task updateTask = taskService.updateTask(task);
