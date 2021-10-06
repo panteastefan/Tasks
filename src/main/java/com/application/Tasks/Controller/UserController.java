@@ -19,21 +19,22 @@ public class UserController {
         this.userService = userService;
     }
 
+    // @TODO probably should write it using token
     @GetMapping("/all")
     public ResponseEntity<List<User>> getAllUsers(){
         List<User> users = userService.findAllUsers();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-    @GetMapping("/find/{id}")
-    public ResponseEntity<User> getUserById(Long id){
-        User user = userService.findUserById(id);
-        return new ResponseEntity<>(user, HttpStatus.OK);
-    }
-
-    @PostMapping("/add")
-    public ResponseEntity<User> addUser(@RequestBody User newUser){
-        User user = userService.addUser(newUser);
-        return new ResponseEntity<>(newUser, HttpStatus.CREATED);
-    }
+//    @GetMapping("/find/{id}")
+//    public ResponseEntity<User> getUserById(Long id){
+//        User user = userService.findUserById(id);
+//        return new ResponseEntity<>(user, HttpStatus.OK);
+//    }
+//
+//    @PostMapping("/add")
+//    public ResponseEntity<User> addUser(@RequestBody User newUser){
+//        User user = userService.addUser(newUser);
+//        return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+//    }
 }

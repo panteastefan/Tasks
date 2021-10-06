@@ -21,32 +21,32 @@ public class TaskService {
         this.userRepository = userRepository;
     }
 
-    public Task addTask(Task task) {
-        task.setName(task.getName());
-        task.setDescription(task.getDescription());
-        task.setDueDate(task.getDueDate());
-        task.setStatus(Status.NEW);
-        return taskRepository.save(task);
-    }
+//    public Task addTask(Task task) {
+//        task.setName(task.getName());
+//        task.setDescription(task.getDescription());
+//        task.setDueDate(task.getDueDate());
+//        task.setStatus(Status.NEW);
+//        return taskRepository.save(task);
+//    }
 
-    public List<Task> findAllTasks() {
-        return taskRepository.findAll();
-    }
+//    public List<Task> findAllTasks() {
+//        return taskRepository.findAll();
+//    }
 
     public HashSet<Task> findMyTasks(Long userId) {
         return taskRepository.findTasksByUserId(userId);
     }
 
-    public Task updateTask(Task task) {
-        return taskRepository.save(task);
-    }
-
-    public Task findTaskById(Long id) {
-        return taskRepository.findTaskById(id);
-    }
-
-    public void deleteTask(Long id) {
-        // @TODO taskRepository.deleteTaskById(id); not working. why ??
-        taskRepository.deleteById(id);
-    }
+//    public Task updateTask(Task task) {
+//        return taskRepository.save(task);
+//    }
+//
+//    public Task findTaskById(Long id) {
+//        return taskRepository.findTaskById(id);
+//    }
+//
+//    public void deleteTask(Long id) {
+//        // @TODO taskRepository.deleteTaskById(id); not working. why ??
+//        taskRepository.deleteById(id);
+//    }
 }

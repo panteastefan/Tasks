@@ -9,7 +9,8 @@ import java.util.HashSet;
 
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Long> {
-    void deleteTaskById(Long id);
-    Task findTaskById(Long id);
+//    void deleteTaskById(Long id);
+//    Task findTaskById(Long id);
+
     HashSet<Task> findTasksByUserId(Long id);
 }

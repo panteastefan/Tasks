@@ -18,23 +18,23 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User addUser(User user){
-        user.setName(UUID.randomUUID().toString());
-        return userRepository.save(user);
-    }
+//    public User addUser(User user){
+//        user.setName(UUID.randomUUID().toString());
+//        return userRepository.save(user);
+//    }
     public List<User> findAllUsers(){
         return userRepository.findAll();
     }
 
-    public User updateUser(User user){
-        return userRepository.save(user);
-    }
-
-    public User findUserById(Long id){
-        return userRepository.findUserById(id);
-    }
-
-    public void deleteUser(Long id){
-        userRepository.deleteUserById(id);
-    }
+//    public User updateUser(User user){
+//        return userRepository.save(user);
+//    }
+//
+//    public User findUserById(Long id){
+//        return userRepository.findUserById(id);
+//    }
+//
+//    public void deleteUser(Long id){
+//        userRepository.deleteUserById(id);
+//    }
 }

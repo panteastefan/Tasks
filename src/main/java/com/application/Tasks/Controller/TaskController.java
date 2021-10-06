@@ -41,28 +41,28 @@ public class TaskController {
         return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
     }
 
-    @GetMapping("/find/{id}")
-    public ResponseEntity<Task> getTaskById(@PathVariable("id") Long id){
-        Task task = taskService.findTaskById(id);
-        return new ResponseEntity<>(task, HttpStatus.OK);
-    }
-
-    // in loc de Task -> TaskDTO
-    @PostMapping("/add")
-    public ResponseEntity<Task> addTask(@RequestBody Task task){
-        Task newTask = taskService.addTask(task);
-        return new ResponseEntity<>(newTask, HttpStatus.CREATED);
-    }
-
-    @PostMapping("/update")
-    public ResponseEntity<Task> updateTask(@RequestBody Task task){
-        Task updateTask = taskService.updateTask(task);
-        return new ResponseEntity<>(updateTask, HttpStatus.OK);
-    }
-
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteTask(@PathVariable("id") Long id){
-        taskService.deleteTask(id);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
+//    @GetMapping("/find/{id}")
+//    public ResponseEntity<Task> getTaskById(@PathVariable("id") Long id){
+//        Task task = taskService.findTaskById(id);
+//        return new ResponseEntity<>(task, HttpStatus.OK);
+//    }
+//
+//    // in loc de Task -> TaskDTO
+//    @PostMapping("/add")
+//    public ResponseEntity<Task> addTask(@RequestBody Task task){
+//        Task newTask = taskService.addTask(task);
+//        return new ResponseEntity<>(newTask, HttpStatus.CREATED);
+//    }
+//
+//    @PostMapping("/update")
+//    public ResponseEntity<Task> updateTask(@RequestBody Task task){
+//        Task updateTask = taskService.updateTask(task);
+//        return new ResponseEntity<>(updateTask, HttpStatus.OK);
+//    }
+//
+//    @DeleteMapping("/delete/{id}")
+//    public ResponseEntity<?> deleteTask(@PathVariable("id") Long id){
+//        taskService.deleteTask(id);
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
 }
