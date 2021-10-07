@@ -1,6 +1,7 @@
 package com.application.Tasks.Controller;
 
 import com.application.Tasks.DTOs.AuthenticatedRequestDTO;
+import com.application.Tasks.DTOs.TaskDTO;
 import com.application.Tasks.Model.Task;
 import com.application.Tasks.Service.LoginService;
 import com.application.Tasks.Service.TaskService;
@@ -47,6 +48,15 @@ public class TaskController {
         }
         return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
     }
+    @PostMapping("/add")
+    public ResponseEntity<Task> addTask(@RequestBody TaskDTO taskDTO){
+        if (taskDTO != null &&
+                LoginService.userTokenMap.get(taskDTO.getUserToken()) != null){
+            Task newTask = taskService.addTask(taskDTO.getTask());
+            return new ResponseEntity<>(newTask, HttpStatus.CREATED);
+        }
+        return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
+    }
 
 //    @GetMapping("/find/{id}")
 //    public ResponseEntity<Task> getTaskById(@PathVariable("id") Long id){
@@ -55,11 +65,6 @@ public class TaskController {
 //    }
 
     // in loc de Task -> TaskDTO
-    @PostMapping("/add")
-    public ResponseEntity<Task> addTask(@RequestBody Task task){
-        Task newTask = taskService.addTask(task);
-        return new ResponseEntity<>(newTask, HttpStatus.CREATED);
-    }
 
 //    @PostMapping("/update")
 //    public ResponseEntity<Task> updateTask(@RequestBody Task task){
