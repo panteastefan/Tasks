@@ -21,7 +21,6 @@ public class UserController {
         this.userService = userService;
     }
 
-    // @TODO probably should write it using token
     @PostMapping("/all")
     public ResponseEntity<List<User>> getAllUsers(@RequestBody AuthenticatedRequestDTO authenticatedRequestDTO){
         if (authenticatedRequestDTO != null &&

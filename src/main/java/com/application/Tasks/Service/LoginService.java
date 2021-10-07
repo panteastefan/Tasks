@@ -28,10 +28,10 @@ public class LoginService {
         String hashedPassword = Hashing.sha256().hashString(loginDTO.getPassword() + LOGIN_SECRET_PASSWORD,
                         StandardCharsets.UTF_8).toString();
         System.out.println(hashedPassword);
-        User user = userRepository.findUserByUserNameAndPassword(loginDTO.getUsername(), hashedPassword);
+        User user = userRepository.findUserByUsernameAndPassword(loginDTO.getUsername(), hashedPassword);
         String token = null;
         if (user != null){
-            token = Hashing.sha256().hashString(user.getUserName() + TOKEN +
+            token = Hashing.sha256().hashString(user.getUsername() + TOKEN +
                             System.currentTimeMillis(), StandardCharsets.UTF_8).toString();
             userTokenMap.put(token, user.getId());
         }

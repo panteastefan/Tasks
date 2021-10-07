@@ -9,13 +9,13 @@ public class User {
     @GeneratedValue
     Long id;
 
-    @Column(name = "user_name")
-    private String userName;
+    @Column(name = "username")
+    private String username;
     private String password;
     private String name;
 
-    public User(String userName, String password, String name) {
-        this.userName = userName;
+    public User(String username, String password, String name) {
+        this.username = username;
         this.password = password;
         this.name = name;
     }
@@ -48,12 +48,12 @@ public class User {
         this.name = name;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -77,7 +77,7 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", userName='" + userName + '\'' +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
                 ", tasks=" + tasks +
