@@ -1,6 +1,7 @@
 package com.application.Tasks.Service;
 
 import com.application.Tasks.DTOs.TaskCreationDTO;
+import com.application.Tasks.DTOs.TaskDeleteDTO;
 import com.application.Tasks.Model.Status;
 import com.application.Tasks.Model.Task;
 import com.application.Tasks.Model.User;
@@ -47,12 +48,7 @@ public class TaskService {
         return taskRepository.saveAndFlush(task);
     }
 
-//    public Task findTaskById(Long id) {
-//        return taskRepository.findTaskById(id);
-//    }
-//
-//    public void deleteTask(Long id) {
-//        // @TODO taskRepository.deleteTaskById(id); not working. why ??
-//        taskRepository.deleteById(id);
-//    }
+    public boolean deleteTaskById(TaskDeleteDTO taskDeleteDTO) {
+        return taskRepository.deleteTaskById(taskDeleteDTO.getId());
+    }
 }

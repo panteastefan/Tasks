@@ -10,7 +10,6 @@ import java.util.List;
 
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Long> {
-//    void deleteTaskById(Long id);
-//    Task findTaskById(Long id);
+    boolean deleteTaskById(Long id);
     List<Task> findTasksByUserId(Long id);
 }
