@@ -1,8 +1,10 @@
 package com.application.Tasks.Controller;
 
 import com.application.Tasks.DTOs.AuthenticatedRequestDTO;
+import com.application.Tasks.DTOs.TaskCreationDTO;
 import com.application.Tasks.DTOs.TaskDTO;
 import com.application.Tasks.DTOs.TaskDeleteDTO;
+import com.application.Tasks.Mapper.TaskMapper;
 import com.application.Tasks.Model.Task;
 import com.application.Tasks.Service.LoginService;
 import com.application.Tasks.Service.TaskService;
@@ -11,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/tasks")
@@ -22,25 +25,30 @@ public class TaskController {
     }
 
     @PostMapping("/all")
-    public ResponseEntity<List<Task>> getAllTasks(@RequestBody AuthenticatedRequestDTO authenticatedRequestDTO){
+    public ResponseEntity<List<TaskCreationDTO>> getAllTasks(@RequestBody AuthenticatedRequestDTO authenticatedRequestDTO){
         if (authenticatedRequestDTO != null &&
                 LoginService.userTokenMap.get(authenticatedRequestDTO.getUserToken()) != null){
             List<Task> tasks = taskService.findAllTasks();
             tasks.sort(Comparator.comparing(Task::getDueDate));
-            return new ResponseEntity<>(tasks, HttpStatus.OK);
+
+            List<TaskCreationDTO> taskCreationDTOs = tasks.stream().map(
+                    TaskMapper::mapTaskToDTO).collect(Collectors.toList());
+            return new ResponseEntity<>(taskCreationDTOs, HttpStatus.OK);
         }
         return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
     }
     @PostMapping("/mine")
-    public ResponseEntity<List<Task>> getMyTasks(@RequestBody AuthenticatedRequestDTO authenticatedRequestDTO){
+    public ResponseEntity<List<TaskCreationDTO>> getMyTasks(@RequestBody AuthenticatedRequestDTO authenticatedRequestDTO){
         if (authenticatedRequestDTO != null &&
                 LoginService.userTokenMap.get(authenticatedRequestDTO.getUserToken()) != null){
 
             List<Task> tasks =
                     taskService.findMyTasks(LoginService.userTokenMap.get(authenticatedRequestDTO.getUserToken()));
-
             tasks.sort(Comparator.comparing(Task::getDueDate).reversed());
-            return new ResponseEntity<>(tasks, HttpStatus.OK);
+
+            List<TaskCreationDTO> taskCreationDTOs = tasks.stream().map(
+                    TaskMapper::mapTaskToDTO).collect(Collectors.toList());
+            return new ResponseEntity<>(taskCreationDTOs, HttpStatus.OK);
         }
         return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
     }
