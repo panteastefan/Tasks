@@ -6,22 +6,15 @@ import com.application.Tasks.DTOs.TaskDeleteDTO;
 import com.application.Tasks.Model.Task;
 import com.application.Tasks.Service.LoginService;
 import com.application.Tasks.Service.TaskService;
-import org.apache.coyote.Response;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/tasks")
 public class TaskController {
-    @Autowired
     private final TaskService taskService;
 
     public TaskController(TaskService taskService) {
