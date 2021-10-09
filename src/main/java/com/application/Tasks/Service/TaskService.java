@@ -1,7 +1,9 @@
 package com.application.Tasks.Service;
 
+import com.application.Tasks.DTOs.TaskCreationDTO;
 import com.application.Tasks.Model.Status;
 import com.application.Tasks.Model.Task;
+import com.application.Tasks.Model.User;
 import com.application.Tasks.Repository.TaskRepository;
 import com.application.Tasks.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,11 @@ public class TaskService {
         this.userRepository = userRepository;
     }
 
-    public Task addTask(Task task) {
+    public Task addTask(TaskCreationDTO taskCreationDTO) {
+        User user = userRepository.findUserByUsername(taskCreationDTO.getUsername());
+        Task task = new Task(taskCreationDTO.getName(), taskCreationDTO.getDescription(),
+                taskCreationDTO.getDueDate(), taskCreationDTO.getStatus(),
+                user);
         return taskRepository.saveAndFlush(task);
     }
 

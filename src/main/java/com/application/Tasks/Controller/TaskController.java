@@ -52,7 +52,7 @@ public class TaskController {
     public ResponseEntity<Task> addTask(@RequestBody TaskDTO taskDTO){
         if (taskDTO != null &&
                 LoginService.userTokenMap.get(taskDTO.getUserToken()) != null){
-            Task newTask = taskService.addTask(taskDTO.getTask());
+            Task newTask = taskService.addTask(taskDTO.getTaskCreationDTO());
             return new ResponseEntity<>(newTask, HttpStatus.CREATED);
         }
         return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);

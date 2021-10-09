@@ -24,6 +24,14 @@ public class Task {
     public Task() {
     }
 
+    public Task(String name, String description, Date dueDate, Status status, User user) {
+        this.name = name;
+        this.description = description;
+        this.dueDate = dueDate;
+        this.status = status;
+        this.user = user;
+    }
+
     public Task(String name, String description, Date dueDate, Status status) {
         this.name = name;
         this.description = description;
