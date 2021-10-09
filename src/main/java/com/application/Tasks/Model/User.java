@@ -1,4 +1,6 @@
 package com.application.Tasks.Model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -21,6 +23,7 @@ public class User {
     }
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private Set<Task> tasks;
 
     public User(Long id, String name, Set<Task> tasks) {
