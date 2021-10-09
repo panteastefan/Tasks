@@ -6,24 +6,24 @@ import com.application.Tasks.Model.Task;
 import java.util.Date;
 
 public class TaskDTO extends AuthenticatedRequestDTO{
-    Task task;
+    TaskCreationDTO taskCreationDTO;
     public TaskDTO() {
     }
 
-    public TaskDTO(String userToken, Task task) {
+    public TaskDTO(String userToken, TaskCreationDTO taskCreationDTO) {
         super(userToken);
-        this.task = task;
+        this.taskCreationDTO = taskCreationDTO;
     }
 
-    public TaskDTO(Task task) {
-        this.task = task;
+    public TaskDTO(TaskCreationDTO taskCreationDTO) {
+        this.taskCreationDTO = taskCreationDTO;
     }
 
-    public Task getTask() {
-        return task;
+    public TaskCreationDTO getTaskCreationDTO() {
+        return taskCreationDTO;
     }
 
-    public void setTask(Task task) {
-        this.task = task;
+    public void setTaskCreationDTO(TaskCreationDTO taskCreationDTO) {
+        this.taskCreationDTO = taskCreationDTO;
     }
 }
