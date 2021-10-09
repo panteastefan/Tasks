@@ -67,12 +67,12 @@ public class TaskController {
     public ResponseEntity<Long> deleteTask(@RequestBody TaskDeleteDTO taskDeleteDTO){
         if (taskDeleteDTO != null &&
                 LoginService.userTokenMap.get(taskDeleteDTO.getUserToken()) != null){
-            boolean isRemoved = taskService.deleteTaskById(taskDeleteDTO);
-
-            if (!isRemoved) {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            Long isRemoved = taskService.deleteTaskById(taskDeleteDTO);
+            System.out.println(isRemoved);
+            if (isRemoved != null) {
+                return new ResponseEntity<>(taskDeleteDTO.getTaskId(), HttpStatus.OK);
             }
-            return new ResponseEntity<>(taskDeleteDTO.getId(), HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
     }

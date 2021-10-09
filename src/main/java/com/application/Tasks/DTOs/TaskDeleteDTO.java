@@ -1,25 +1,25 @@
 package com.application.Tasks.DTOs;
 
 public class TaskDeleteDTO extends AuthenticatedRequestDTO{
-    private Long id;
+    private Long taskId;
 
-    public TaskDeleteDTO(String userToken, Long id) {
+    public TaskDeleteDTO(String userToken, Long taskId) {
         super(userToken);
-        this.id = id;
+        this.taskId = taskId;
     }
 
-    public TaskDeleteDTO(Long id) {
-        this.id = id;
+    public TaskDeleteDTO(Long taskId) {
+        this.taskId = taskId;
     }
 
     public TaskDeleteDTO() {
     }
 
-    public Long getId() {
-        return id;
+    public Long getTaskId() {
+        return taskId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setTaskId(Long taskId) {
+        this.taskId = taskId;
     }
 }

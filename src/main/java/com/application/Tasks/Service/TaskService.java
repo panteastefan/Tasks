@@ -2,7 +2,6 @@ package com.application.Tasks.Service;
 
 import com.application.Tasks.DTOs.TaskCreationDTO;
 import com.application.Tasks.DTOs.TaskDeleteDTO;
-import com.application.Tasks.Model.Status;
 import com.application.Tasks.Model.Task;
 import com.application.Tasks.Model.User;
 import com.application.Tasks.Repository.TaskRepository;
@@ -10,6 +9,7 @@ import com.application.Tasks.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.*;
 
 @Service
@@ -48,7 +48,8 @@ public class TaskService {
         return taskRepository.saveAndFlush(task);
     }
 
-    public boolean deleteTaskById(TaskDeleteDTO taskDeleteDTO) {
-        return taskRepository.deleteTaskById(taskDeleteDTO.getId());
+    @Transactional
+    public Long deleteTaskById(TaskDeleteDTO taskDeleteDTO) {
+        return taskRepository.deleteTaskById(taskDeleteDTO.getTaskId());
     }
 }
