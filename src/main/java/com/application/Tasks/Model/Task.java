@@ -32,6 +32,14 @@ public class Task {
         this.user = user;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public Task(Long id, String name, String description, Date dueDate, Status status, User user) {
         this.id = id;
         this.name = name;
