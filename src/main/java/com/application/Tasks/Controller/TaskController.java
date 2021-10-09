@@ -57,6 +57,15 @@ public class TaskController {
         }
         return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
     }
+    @PostMapping("/update")
+    public ResponseEntity<Task> updateTask(@RequestBody TaskDTO taskDTO){
+        if (taskDTO != null &&
+                LoginService.userTokenMap.get(taskDTO.getUserToken()) != null){
+            Task newTask = taskService.updateTask(taskDTO.getTaskCreationDTO());
+            return new ResponseEntity<>(newTask, HttpStatus.CREATED);
+        }
+        return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
+    }
 
 //    @GetMapping("/find/{id}")
 //    public ResponseEntity<Task> getTaskById(@PathVariable("id") Long id){

@@ -39,10 +39,14 @@ public class TaskService {
         return taskRepository.findTasksByUserId(userId);
     }
 
-//    public Task updateTask(Task task) {
-//        return taskRepository.save(task);
-//    }
-//
+    public Task updateTask(TaskCreationDTO taskCreationDTO) {
+        User user = userRepository.findUserByUsername(taskCreationDTO.getUsername());
+        Task task = new Task(taskCreationDTO.getId(), taskCreationDTO.getName(), taskCreationDTO.getDescription(),
+                taskCreationDTO.getDueDate(), taskCreationDTO.getStatus(),
+                user);
+        return taskRepository.saveAndFlush(task);
+    }
+
 //    public Task findTaskById(Long id) {
 //        return taskRepository.findTaskById(id);
 //    }
