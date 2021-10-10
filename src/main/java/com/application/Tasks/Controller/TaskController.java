@@ -29,7 +29,7 @@ public class TaskController {
         if (authenticatedRequestDTO != null &&
                 LoginService.userTokenMap.get(authenticatedRequestDTO.getUserToken()) != null){
             List<Task> tasks = taskService.findAllTasks();
-            tasks.sort(Comparator.comparing(Task::getDueDate));
+            tasks.sort(Comparator.comparing(Task::getDueDate).reversed());
 
             List<TaskCreationDTO> taskCreationDTOs = tasks.stream().map(
                     TaskMapper::mapTaskToDTO).collect(Collectors.toList());
