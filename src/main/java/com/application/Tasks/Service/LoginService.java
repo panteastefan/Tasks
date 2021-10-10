@@ -21,7 +21,6 @@ public class LoginService {
         this.userRepository = userRepository;
     }
 
-    //@TODO send a part of token, not all of it.
     final String LOGIN_SECRET_PASSWORD = "rsOha.y[m#!GJ%.>\"HE[F4K;*aVe-vtF/]/<9qC_zjc}S[xNaNm8/Xw1f8zb&H1";
     final String TOKEN = "m#!TU=Im20`Rn[}8'*Sp5Hm)>unnU|Ip]R|bEgpnq4?A3j0j7r3XF;?b&'#f[hf";
     public String authenticate(LoginDTO loginDTO){

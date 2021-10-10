@@ -3,7 +3,6 @@ package com.application.Tasks.Controller;
 import com.application.Tasks.DTOs.LoginDTO;
 import com.application.Tasks.DTOs.LoginResponseDTO;
 import com.application.Tasks.Service.LoginService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/login")
 public class LoginController {
-    @Autowired
     private final LoginService loginService;
 
     public LoginController(LoginService loginService) {

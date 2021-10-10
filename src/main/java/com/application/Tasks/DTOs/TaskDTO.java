@@ -1,10 +1,5 @@
 package com.application.Tasks.DTOs;
 
-import com.application.Tasks.Model.Status;
-import com.application.Tasks.Model.Task;
-
-import java.util.Date;
-
 public class TaskDTO extends AuthenticatedRequestDTO{
     TaskCreationDTO taskCreationDTO;
     public TaskDTO() {

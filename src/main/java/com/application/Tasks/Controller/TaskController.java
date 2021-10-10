@@ -37,6 +37,7 @@ public class TaskController {
         }
         return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
     }
+
     @PostMapping("/mine")
     public ResponseEntity<List<TaskCreationDTO>> getMyTasks(@RequestBody AuthenticatedRequestDTO authenticatedRequestDTO){
         if (authenticatedRequestDTO != null &&
@@ -52,6 +53,7 @@ public class TaskController {
         }
         return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
     }
+
     @PostMapping("/add")
     public ResponseEntity<Task> addTask(@RequestBody TaskDTO taskDTO){
         if (taskDTO != null &&
@@ -61,6 +63,7 @@ public class TaskController {
         }
         return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
     }
+
     @PostMapping("/update")
     public ResponseEntity<Task> updateTask(@RequestBody TaskDTO taskDTO){
         if (taskDTO != null &&
