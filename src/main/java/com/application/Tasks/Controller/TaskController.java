@@ -11,6 +11,8 @@ import com.application.Tasks.Service.TaskService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -55,7 +57,7 @@ public class TaskController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Task> addTask(@RequestBody TaskDTO taskDTO){
+    public ResponseEntity<Task> addTask(@Valid @RequestBody TaskDTO taskDTO){
         if (taskDTO != null &&
                 LoginService.userTokenMap.get(taskDTO.getUserToken()) != null){
             Task newTask = taskService.addTask(taskDTO.getTaskCreationDTO());
@@ -65,7 +67,7 @@ public class TaskController {
     }
 
     @PostMapping("/update")
-    public ResponseEntity<Task> updateTask(@RequestBody TaskDTO taskDTO){
+    public ResponseEntity<Task> updateTask(@Valid @RequestBody TaskDTO taskDTO){
         if (taskDTO != null &&
                 LoginService.userTokenMap.get(taskDTO.getUserToken()) != null){
             Task newTask = taskService.updateTask(taskDTO.getTaskCreationDTO());

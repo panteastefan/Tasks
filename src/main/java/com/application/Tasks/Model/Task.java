@@ -1,6 +1,8 @@
 package com.application.Tasks.Model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
@@ -9,6 +11,8 @@ public class Task {
     @Column(nullable = false, updatable = false)
     @GeneratedValue Long id;
 
+    @NotNull
+    @Size(min=3, max=20, message = "Name of the task should have between 3 and 20 characters")
     private String name;
     private String description;
     private Date dueDate;
