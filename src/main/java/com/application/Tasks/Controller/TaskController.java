@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 import java.util.Comparator;
 import java.util.List;
@@ -58,22 +59,32 @@ public class TaskController {
 
     @PostMapping("/add")
     public ResponseEntity<Task> addTask(@Valid @RequestBody TaskDTO taskDTO){
-        if (taskDTO != null &&
-                LoginService.userTokenMap.get(taskDTO.getUserToken()) != null){
-            Task newTask = taskService.addTask(taskDTO.getTaskCreationDTO());
-            return new ResponseEntity<>(newTask, HttpStatus.CREATED);
+        try{
+            if (taskDTO != null &&
+                    LoginService.userTokenMap.get(taskDTO.getUserToken()) != null){
+                Task newTask = taskService.addTask(taskDTO.getTaskCreationDTO());
+                return new ResponseEntity<>(newTask, HttpStatus.CREATED);
+            }
+            return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
         }
-        return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
+        catch( ConstraintViolationException e){
+            return new ResponseEntity<>(null, HttpStatus.NOT_ACCEPTABLE);
+        }
     }
 
     @PostMapping("/update")
     public ResponseEntity<Task> updateTask(@Valid @RequestBody TaskDTO taskDTO){
-        if (taskDTO != null &&
-                LoginService.userTokenMap.get(taskDTO.getUserToken()) != null){
-            Task newTask = taskService.updateTask(taskDTO.getTaskCreationDTO());
-            return new ResponseEntity<>(newTask, HttpStatus.CREATED);
+        try{
+            if (taskDTO != null &&
+                    LoginService.userTokenMap.get(taskDTO.getUserToken()) != null){
+                Task newTask = taskService.updateTask(taskDTO.getTaskCreationDTO());
+                return new ResponseEntity<>(newTask, HttpStatus.CREATED);
+            }
+            return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
         }
-        return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
+        catch( ConstraintViolationException e){
+            return new ResponseEntity<>(null, HttpStatus.NOT_ACCEPTABLE);
+        }
     }
 
     @PostMapping("/delete")
