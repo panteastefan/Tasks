@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -60,8 +61,10 @@ public class TaskController {
     @PostMapping("/add")
     public ResponseEntity<Task> addTask(@Valid @RequestBody TaskDTO taskDTO){
         try{
-            if (taskDTO != null &&
-                    LoginService.userTokenMap.get(taskDTO.getUserToken()) != null){
+            if (taskDTO != null && LoginService.userTokenMap.get(taskDTO.getUserToken()) != null){
+                if (taskDTO.getTaskCreationDTO().getUsername().equals("")){
+                    return new ResponseEntity<>(null, HttpStatus.NOT_ACCEPTABLE);
+                }
                 Task newTask = taskService.addTask(taskDTO.getTaskCreationDTO());
                 return new ResponseEntity<>(newTask, HttpStatus.CREATED);
             }
@@ -77,7 +80,11 @@ public class TaskController {
         try{
             if (taskDTO != null &&
                     LoginService.userTokenMap.get(taskDTO.getUserToken()) != null){
+                if (taskDTO.getTaskCreationDTO().getUsername().equals("")){
+                    return new ResponseEntity<>(null, HttpStatus.NOT_ACCEPTABLE);
+                }
                 Task newTask = taskService.updateTask(taskDTO.getTaskCreationDTO());
+
                 return new ResponseEntity<>(newTask, HttpStatus.CREATED);
             }
             return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
@@ -92,7 +99,6 @@ public class TaskController {
         if (taskDeleteDTO != null &&
                 LoginService.userTokenMap.get(taskDeleteDTO.getUserToken()) != null){
             Long isRemoved = taskService.deleteTaskById(taskDeleteDTO);
-            System.out.println(isRemoved);
             if (isRemoved != null) {
                 return new ResponseEntity<>(taskDeleteDTO.getTaskId(), HttpStatus.OK);
             }
