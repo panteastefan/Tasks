@@ -1,9 +1,6 @@
 package com.application.Tasks.DTOs;
 
 import com.application.Tasks.Model.Status;
-
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;

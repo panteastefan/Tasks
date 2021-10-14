@@ -2,6 +2,8 @@ package com.application.Tasks.Model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
@@ -11,9 +13,17 @@ public class User {
     @GeneratedValue
     Long id;
 
+    @NotNull
+    @Size(min=3, max=20)
     @Column(name = "username")
     private String username;
+
+    @NotNull
+    @Size(min=3)
     private String password;
+
+    @NotNull
+    @Size(min=3, max=20)
     private String name;
 
     public User(String username, String password, String name) {
