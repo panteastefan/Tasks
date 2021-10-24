@@ -1,6 +1,5 @@
 package com.application.Tasks.Service;
 import com.application.Tasks.DTOs.RegisterUserDTO;
-import com.application.Tasks.Model.Task;
 import com.application.Tasks.Model.User;
 import com.application.Tasks.Repository.UserRepository;
 import com.google.common.hash.Hashing;
@@ -10,10 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
-
 @Service
 public class RegisterService {
 
